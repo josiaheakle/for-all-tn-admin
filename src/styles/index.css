@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,4 +10,20 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} */
+
+
+:root {
+  --green: #237B00;
+  --yellow-green: #84B800;
+  --yellow: #B5B800;
+  --orange: #D47E00;
+  --red: #D41200;
+
+  --scorecard-width: 80vw;
+  --image-width: 100px;
+  --icon-width: 80px;
+
+
+  font-family: 'Lato', sans-serif;
 }

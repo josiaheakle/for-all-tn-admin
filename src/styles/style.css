@@ -1,0 +1,197 @@
+
+
+.App {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+.CandidateHub {
+    width: var(--scorecard-width);
+}
+
+.candidate-container {
+    padding: 12px;
+    border: 1px solid black;
+    border-radius: 20px;
+    display: grid;
+    margin-bottom: 1em;
+}
+
+.candidate-issue-container {
+    padding-left: 20px;
+    padding-right: 20px;
+    display: grid;
+    grid-template-columns: auto;
+    grid-auto-rows: auto;
+    align-items: center;
+}
+
+.single-issue-opinion-container {
+    display: grid;
+}
+
+.candidate-issue {
+    text-align: start;
+}
+
+.candidate-opinion {
+    text-align: end;
+
+}
+
+.candidate-opinion.selected {
+    text-decoration: underline;
+}
+
+.yes-opinon {
+    color: var(--green);
+}
+
+.leans-yes-opinion {
+    color: var(--yellow-green);
+}
+
+.neutral-opinion {
+    color: var(--yellow);
+}
+
+.leans-no-opinion {
+    color: var(--orange);
+}
+
+.no-opinion {
+    color: var(--red);
+}
+
+
+@media only screen and (max-width: 900px) and (min-width: 501px) {
+
+    .candidate-email {
+        grid-column-start: 3;
+        grid-column-end: 4;
+    }
+
+    .candidate-issue-container {
+        padding-left: 0;
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+    
+
+    .candidate-container {
+        grid-template-rows: auto auto;
+        row-gap: 10px;
+        /* grid-template-columns: calc(var(--image-width) + 10px) auto var(--image-width); */
+        grid-template-columns: calc(var(--image-width) + 10px) auto;
+    }
+
+}
+
+@media only screen and (min-width: 901px) {
+
+    .candidate-container {
+        /* grid-template-columns: calc(var(--image-width) + 10px) 150px calc(var(--icon-width) + 10px) auto auto; */
+        grid-template-columns: calc(var(--image-width) + 10px) 150px calc(var(--icon-width) + 10px) auto;
+
+    }
+
+}
+
+@media only screen and (max-width: 500px) {
+	.candidate-container {
+        grid-template-columns: auto;
+        grid-auto-rows: auto;
+    }
+
+    .candidate-issue-container {
+        padding: 0;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .single-issue-opinion-container {
+        grid-template-columns: auto;
+        grid-auto-rows: auto;
+
+    }
+
+    .candidate-issue {
+        text-align: center;
+    }
+    
+    .candidate-opinion {
+        text-align: center;
+    
+    }
+    
+
+}
+
+@media only screen and (min-width: 401px) {
+
+    .single-issue-opinion-container {
+        grid-template-columns: auto auto;
+    }
+}
+
+
+.candidate-info {
+    /* width: 200px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.candidate-span {
+    text-align: center;
+}
+
+.candidate-image {
+    width: var(--image-width);
+    height: var(--image-width);
+    border-radius: 12px;
+}
+
+.candidate-party-image {
+    width: var(--icon-width);
+    height: var(--icon-width);
+}
+
+.candidate-sub-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.candidate-issue-form {
+    flex-direction: row;
+}
+
+.candidates-container {
+
+    overflow: hidden;
+
+}
+
+.candidates-container.open {
+
+
+}
+
+.candidates-container.close {
+
+    height: 0;
+
+}
