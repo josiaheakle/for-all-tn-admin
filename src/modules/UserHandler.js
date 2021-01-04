@@ -5,8 +5,8 @@ const UserHandler = (() => {
     
     const _updateUser = () => {
         
-        console.log(`updating current user`)
-        console.log(_currentUser)
+        // console.log(`updating current user`)
+        // console.log(_currentUser)
         _onUserUpdate(_currentUser)
         
     }

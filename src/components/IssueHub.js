@@ -2,6 +2,8 @@
 import {useEffect, useState} from "react"
 import axios from "axios"
 import Issue from "./Issue.js"
+import UserHandler from "../modules/UserHandler.js"
+import { toast } from "react-toastify"
 
 const IssueHub = (props) => {
 
@@ -63,30 +65,37 @@ const IssueHub = (props) => {
                 "Accept": "application/json"
             },
             data: {
-                issue: issueId
+                issue: issueId,
+                user: UserHandler.getCurrentUser()._id
             }
         }
 
         const res = await axios(options)
+        if(res.data.type === 'SUCCESS') {
+            setTimeout(() => {
+                importAllIssues()
+            }, 200)
+        }
+        else toast(res.data.message)
 
         // console.log(`delete responce`)
         // console.log(res)
-        setTimeout(() => {
-            importAllIssues()
-        }, 100)
+        // setTimeout(() => {
+        //     importAllIssues()
+        // }, 100)
 
     }
 
     const importAllIssues = async () => {
+
+        // console.log(`importing issues`)
+
         const options = {
             url: 'http://localhost:4000/get/issues',
             method: "GET"
         }
 
         const res = await axios(options)
-
-        // console.log(`getting issues`)
-        // console.log(res)
 
         setIssues(res.data)
 
@@ -110,7 +119,8 @@ const IssueHub = (props) => {
             data: {
                 title: issueTitle,
                 description: issueDescr,
-                issueID: editingIssueId
+                issueID: editingIssueId,
+                user: UserHandler.getCurrentUser()._id
             }
         }
 
@@ -119,6 +129,9 @@ const IssueHub = (props) => {
 
 
         const res = await axios(options)
+
+        if(res.data.type !== 'SUCCESS') toast(res.data.message)
+        
         importAllIssues()
         // console.log(res)
     
@@ -146,7 +159,7 @@ const IssueHub = (props) => {
     }, [])
 
     return (
-        <div className='IssueHub'>
+        <div className='IssueHub card'>
 
             {(editing===true)?
                 <form id='new-issue-form' onSubmit={createNewIssue} >

@@ -62,7 +62,7 @@
     gap: 1em;
 }
 
-.IssueHub {
+/* .IssueHub {
 
 
     padding: 12px;
@@ -74,8 +74,29 @@
     justify-content: center;
 
 
+} */
+
+
+.card {
+    padding: 12px;
+    border: 1px solid black;
+    margin-bottom: 1em;
+    background-color: var(--trans-mandarin);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
 }
 
+.UserCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 2em;
+    padding-right: 2em;
+    font-size: 1.2em;
+}
 
 .vertical-words {
     margin-left: 1em;
@@ -190,6 +211,10 @@
 
 .candidate-issue {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .candidate-opinion {
@@ -384,10 +409,10 @@
 
 }
 
-.candidates-container.open {
+/* .candidates-container.open {
 
 
-}
+} */
 
 .candidates-container.close {
 
@@ -553,4 +578,8 @@ label {
 
 .no {
     background-color: var(--red);
+}
+
+.candidate-issue-form {
+    margin-bottom: 0 !important;
 }

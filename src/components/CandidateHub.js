@@ -89,7 +89,7 @@ const CandidateHub = (props) => {
 
     const toggleContainerOpen = (e) => {
         
-        console.log(e.target)
+        // console.log(e.target)
         if(e.target.textContent === 'Hide') e.target.textContent = 'Open' 
         else e.target.textContent = 'Hide'
 

@@ -4,6 +4,8 @@ import axios from "axios"
 import OpinionOption from "./OpinionOption.js"
 import UserHandler from "../modules/UserHandler.js"
 
+import {toast} from 'react-toastify';
+
 
 const CandidateIssue = (props) => {
 
@@ -33,10 +35,10 @@ const CandidateIssue = (props) => {
 
         const res = await axios(options)
 
-        if(res.data.type === 'SUCCESS') setCandView(opinionStr)
-        // else 
-
-        console.log(res)
+        if(res.data.type === 'SUCCESS') {
+            setCandView(opinionStr)
+        }
+        else toast(res.data.message)
 
     }
 

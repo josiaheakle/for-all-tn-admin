@@ -19,12 +19,3 @@ before deployment :
 
 
 next : 
-    add admin page 
-        only accessible by admin, 
-        can add or remove admin accessability
-
-    update look
-        navbar on top
-        issue hub needs to look better
-
-    loggout button ( probably in navbar )

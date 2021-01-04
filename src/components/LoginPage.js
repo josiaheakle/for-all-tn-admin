@@ -39,7 +39,7 @@ const LoginPage = (props) => {
                 setAlertMessage('')
             }, 10000)
         }
-        console.log(res)
+        // console.log(res)
 
 
     }
@@ -71,7 +71,7 @@ const LoginPage = (props) => {
                 setAlertMessage('')
             }, 10000)
         }
-        console.log(res)
+        // console.log(res)
 
     }
 
@@ -117,9 +117,9 @@ const LoginPage = (props) => {
         }
     }
 
-    useEffect(() => {
-        console.log(`email: ${email}, \npassword: ${password}, \nfirstname: ${firstName}, \nlastname: ${lastName}`)
-    }, [password, email, firstName, lastName])
+    // useEffect(() => {
+    //     // console.log(`email: ${email}, \npassword: ${password}, \nfirstname: ${firstName}, \nlastname: ${lastName}`)
+    // }, [password, email, firstName, lastName])
 
     return (
         <div className='LoginPage'>

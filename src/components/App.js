@@ -11,9 +11,12 @@ import UserHandler from "../modules/UserHandler.js"
 // react functions
 import { Switch, Route, BrowserRouter, Redirect, Link } from "react-router-dom"
 import { useEffect, useState } from "react"
+import { ToastContainer } from "react-toastify"
 
 // css
 import "../styles/style.css"
+import 'react-toastify/dist/ReactToastify.css';
+
 
 // media 
 import bgImg from "../media/sunsphere.jpg"
@@ -36,6 +39,7 @@ function App() {
 
   return (
     <div className="App" >
+      <ToastContainer hideProgressBar={true}  />
         <div className='background-image' style={{ backgroundImage: `url(${bgImg})` }} ></div>
 
         {/* <button id='loggout-button' onClick={UserHandler.loggoutUser}>
