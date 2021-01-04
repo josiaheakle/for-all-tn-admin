@@ -33,6 +33,11 @@ const LoginPage = (props) => {
         const res = await axios(options)
         if(res.data.type === 'SUCCESS') {
             props.setUser(res.data.user)
+        } else {
+            setAlertMessage(res.data)
+            setTimeout(() => {
+                setAlertMessage('')
+            }, 10000)
         }
         console.log(res)
 
@@ -60,6 +65,11 @@ const LoginPage = (props) => {
         const res = await axios(options)
         if(res.data.type === 'SUCCESS') {
             props.setUser(res.data.user)
+        } else {
+            setAlertMessage(res.data)
+            setTimeout(() => {
+                setAlertMessage('')
+            }, 10000)
         }
         console.log(res)
 
@@ -113,47 +123,64 @@ const LoginPage = (props) => {
 
     return (
         <div className='LoginPage'>
-            {(alertMessage)?<span id='alert-message'>{`${alertMessage}`}</span>:null}
-            {/* {(newAccount===false)? */}
-                <form onSubmit={handleSubmit} className='login-form'> 
-                    <label htmlFor='email-input'>Email</label>
-                    <input id='email-input' onChange={editValue}></input>
-                    {(newAccount===true)?
-                        <div>
-                            <label htmlFor='first-name-input'>First Name</label>
-                            <input onChange={editValue} type='text' id='first-name-input' ></input>
-                            <label htmlFor='last-name-input'>Last Name</label>
-                            <input onChange={editValue} type='text' id='last-name-input' ></input>
-                        </div>
-                    : null}
-                    <label htmlFor='password-input'>Password</label>
-                    <input onChange={editValue} type='password' id='password-input'></input>
 
-                    <button type='submit' >
+            <div className='login-header'>
+                <h1> For All TN Admin </h1>
+            </div>
+
+            <div className='login-container'>
+
+                <h2>
+                    {(!newAccount)?`Login`:`Create Account`}
+                </h2>
+                {(alertMessage)?<span id='alert-message'>{`${alertMessage}`}</span>:null}
+                {/* {(newAccount===false)? */}
+                    <form onSubmit={handleSubmit} className='login-form'> 
+                        <label htmlFor='email-input'>Email</label>
+                        <input type='email' id='email-input' onChange={editValue } required='true'></input>
                         {(newAccount===true)?
-                            'Create Account'
-                        :
-                            'Login'
-                        }
-                    </button>
+                            <div className='align-vertical'>
+                                <label htmlFor='first-name-input'>First Name</label>
+                                <input onChange={editValue} type='text' id='first-name-input' required='true'></input>
+                                <label htmlFor='last-name-input'>Last Name</label>
+                                <input onChange={editValue} type='text' id='last-name-input' required='true'></input>
+                            </div>
+                        : null}
+                        <label htmlFor='password-input'>Password
+                        
+                            (
+                            <input onChange={togglePasswordVisibility} type='checkbox' id='show-password-button'></input>
+                            <label htmlFor='show-password-button'>Show</label>
+                            )
+                        </label>
+                        <input onChange={editValue} type='password' id='password-input' required='true'></input>
 
-                </form>
-            {/* : */}
-                {/* <form onSubmit={handleSubmit} className='new-account-form'> 
-                    <label htmlFor='email-input'>Email</label>
-                    <input id='email-input' onChange={editValue}></input>
+                        <button type='submit' >
+                            {(newAccount===true)?
+                                'Create Account'
+                            :
+                                'Login'
+                            }
+                        </button>
+
+                    </form>
+                {/* : */}
+                    {/* <form onSubmit={handleSubmit} className='new-account-form'> 
+                        <label htmlFor='email-input'>Email</label>
+                        <input id='email-input' onChange={editValue}></input>
 
 
-                    <label htmlFor='password-input'>Password</label>
-                    <input type='password' id='password-input'></input>
-                    <button type='submit' >Create Account</button>
-                </form> */}
-            {/* } */}
-            <label htmlFor='show-password-button'>Show Password</label>
-            <input onChange={togglePasswordVisibility} type='checkbox' id='show-password-button'></input>
-            <button onClick={toggleForm}>
-                {(!newAccount) ? `New Account` : `Use Existing Account`}
-            </button>
+                        <label htmlFor='password-input'>Password</label>
+                        <input type='password' id='password-input'></input>
+                        <button type='submit' >Create Account</button>
+                    </form> */}
+                {/* } */}
+                <button onClick={toggleForm}>
+                    {(!newAccount) ? `New Account` : `Use Existing Account`}
+                </button>
+
+
+            </div>
         </div>
     );
 }

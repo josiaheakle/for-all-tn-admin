@@ -11,6 +11,12 @@ const UserHandler = (() => {
         
     }
 
+    const isUserAdmin = () => {
+
+        return _currentUser.admin;
+
+    }
+
     const setOnUserUpdate = (callback) =>  {
         // sets _onUserUpdate to parent callback function
         _onUserUpdate = callback
@@ -33,6 +39,7 @@ const UserHandler = (() => {
     return {
         getCurrentUser: getCurrentUser,
         setCurrentUser: setCurrentUser,
+        isUserAdmin: isUserAdmin,
         loggoutUser: loggoutUser,
         setOnUserUpdate: setOnUserUpdate
     }

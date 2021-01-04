@@ -19,18 +19,20 @@ const Issue = (props) => {
 
     return (
         <div className='Issue' id={`${props.issue.title}`} >
-            <span className='issue-title'>
+            <div className='issue-title'>
                 {props.issue.title}
-            </span>
-            <span className='issue-description'>
+            </div>
+            <div className='issue-description'>
                 {props.issue.description}
-            </span>
-            <button className='edit-button' onClick={editIssue} >
-                Edit
-            </button>
-            <button className='delete-button' onClick={deleteIssue}>
-                Delete
-            </button>
+            </div>
+            <div className='align-horizontal'>
+                <button className='edit-button' onClick={editIssue} >
+                    Edit
+                </button>
+                <button className='delete-button' onClick={deleteIssue}>
+                    Delete
+                </button>
+            </div>
         </div>
     );
 

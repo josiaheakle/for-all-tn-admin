@@ -1,41 +1,195 @@
+.background-image {
 
+    width: 100vw;
+    min-height: 100vh;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: -2;
+
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: grey;
+
+    filter: blur(8px);
+}
 
 .App {
+
     width: 100vw;
-    height: 100vh;
+    min-height: calc(100vh - 3em);
+
+    padding-top: 3em;
+
+    /* position: absolute; */
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+
+
     /* justify-content: center; */
+    /* -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px); */
+
+
+}
+
+#new-issue-form {
+    padding-right: 2em;
+    padding-left: 2em;
+    /* border-right: 1px solid black; */
+    margin-bottom: 0;
+}
+
+
+.Candidate {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .CandidateHub {
     width: var(--scorecard-width);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
 }
 
-.candidate-container {
+.IssueHub {
+
+
     padding: 12px;
     border: 1px solid black;
-    border-radius: 20px;
-    display: grid;
     margin-bottom: 1em;
+    background-color: var(--trans-mandarin);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+
 }
 
-.candidate-issue-container {
-    padding-left: 20px;
-    padding-right: 20px;
-    display: grid;
-    grid-template-columns: auto;
-    grid-auto-rows: auto;
+
+.vertical-words {
+    margin-left: 1em;
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
+#all-issues {
+    padding-right: 2em;
+    padding-left: 2em;
+    padding-bottom: 2em;
+    padding-top: 1em;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Issue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 1em;
+}
+
+.issue-title {
+    min-width: 280px;
+    font-size: 1.4em;
+    margin-bottom: .5em;
+}
+
+.candidate-container {
+    max-width: 1100px;
+    /* justify-self: center; */
+    padding: 12px;
+    box-shadow: 0px 3px 3px var(--brown);
+    /* border: 1px solid black; */
+    border-radius: 20px;
+    margin-bottom: 1em;
+    background-color: var(--blue);
+
+    display: flex;
+    justify-content: space-between;
+
+    /* -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px); */
+
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2em;
+    background-color: var(--light);
+    box-shadow: 3px 3px 3px var(--brown);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.navbar-link {
+    font-size: 1.5em;
+    color: black;
+    text-decoration: none;
+    transition: .5s ease color;
+    padding: 1em;
+}
+
+.navbar-link:hover {
+    color: grey;
+}
+
+.navbar-link.selected {
+    color: grey;
+    pointer-events: none;
+}
+
+.candidate-issue-container {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1em;
+    
+    /* grid-template-columns: auto; */
+    /* grid-auto-rows: auto; */
+    /* align-items: center; */
+    /* text-align: centerZZZZ; */
+}
+
 .single-issue-opinion-container {
-    display: grid;
+    display: flex;
+    justify-content: space-between;
+
+    background-color: var(--light);
+    box-shadow: 2px 2px 3px var(--brown);
+    /* border: 1px solid black; */
+    padding: 1em;
+    margin-bottom: 1em;
+    border-radius: 12px;
+
+    text-align: center;
 }
 
 .candidate-issue {
-    text-align: start;
+    text-align: center;
 }
 
 .candidate-opinion {
@@ -67,76 +221,126 @@
     color: var(--red);
 }
 
+.candidate-information-container {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-around;
+}
 
-@media only screen and (max-width: 900px) and (min-width: 501px) {
-
-    .candidate-email {
-        grid-column-start: 3;
-        grid-column-end: 4;
-    }
+@media only screen and (max-width: 900px) and (min-width: 751px) {
 
     .candidate-issue-container {
-        padding-left: 0;
-        grid-column-start: 1;
-        grid-column-end: 3;
+        flex-direction: column;
     }
-    
+
 
     .candidate-container {
-        grid-template-rows: auto auto;
-        row-gap: 10px;
-        /* grid-template-columns: calc(var(--image-width) + 10px) auto var(--image-width); */
-        grid-template-columns: calc(var(--image-width) + 10px) auto;
+        flex-direction: column;
+
     }
+
+    .candidate-information-container {
+        flex-direction: row;
+    }
+
+    .single-issue-opinion-container {
+        flex-direction: column;
+    }
+
+
+    .candidate-issue-form {
+        flex-direction: row;
+    }
+
+    /* .candidate-opinion-options {
+
+    } */
 
 }
 
 @media only screen and (min-width: 901px) {
 
-    .candidate-container {
-        /* grid-template-columns: calc(var(--image-width) + 10px) 150px calc(var(--icon-width) + 10px) auto auto; */
-        grid-template-columns: calc(var(--image-width) + 10px) 150px calc(var(--icon-width) + 10px) auto;
+    .candidate-issue-container {
+        flex-direction: column;
+    }
 
+    .candidate-issue-form {
+        flex-direction: row;
+    }
+
+    .candidate-container {
+        flex-direction: row;
+
+    }
+
+    .candidate-information-container {
+        flex-direction: column;
+    }
+
+    .single-issue-opinion-container {
+        flex-direction: row;
     }
 
 }
 
-@media only screen and (max-width: 500px) {
-	.candidate-container {
-        grid-template-columns: auto;
-        grid-auto-rows: auto;
-    }
+@media only screen and (min-width: 601px) and (max-width: 751px) {
 
     .candidate-issue-container {
-        padding: 0;
+        flex-direction: row;
     }
+
+    .candidate-container {
+        flex-direction: column;
+
+    }
+
+    .candidate-issue-form {
+        flex-direction: column;
+    }
+
+    .single-issue-opinion-container {
+        flex-direction: column;
+        width: 146px;
+    }
+/* 
+    .candidate-issue-container {
+        
+    } */
+
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 600px) {
+
+    .candidate-issue-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .candidate-container {
+        flex-direction: column;
+
+    }
+
+    .candidate-issue-form {
+        flex-direction: column;
+    }
+
     .single-issue-opinion-container {
-        grid-template-columns: auto;
-        grid-auto-rows: auto;
-
+        flex-direction: column;
+        width: 146px;
     }
 
-    .candidate-issue {
-        text-align: center;
-    }
-    
-    .candidate-opinion {
-        text-align: center;
-    
-    }
-    
+}
+
+/* @media only screen and (max-width: 400px) {
+
 
 }
 
 @media only screen and (min-width: 401px) {
 
-    .single-issue-opinion-container {
-        grid-template-columns: auto auto;
-    }
-}
+ 
+}*/
 
 
 .candidate-info {
@@ -149,6 +353,7 @@
 
 
 .candidate-span {
+    max-width: 100px;
     text-align: center;
 }
 
@@ -170,14 +375,8 @@
     text-align: center;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-}
 
-.candidate-issue-form {
-    flex-direction: row;
-}
+
 
 .candidates-container {
 
@@ -194,4 +393,164 @@ form {
 
     height: 0;
 
+}
+
+.LoginPage {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+
+
+}
+
+#alert-message {
+    padding-bottom: 1em;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    /* border-radius: 10px; */
+    padding: 3em;
+
+    max-width: calc(350px - 6em);
+    text-align: center;
+
+    font-size: 1.5em;
+
+    background-color: var(--trans-mandarin); 
+    /* background: linear-gradient(var(--orange), var(--brown)); */
+
+    /* -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px); */
+
+}
+
+
+.align-vertical {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    padding: .5em;
+    /* border-radius: 1.5em; */
+    outline: none;
+    border: 1px solid var(--brown);
+    margin-bottom: .5em;
+    text-align: center;
+}
+
+button {
+    padding: 6px;
+    /* border-radius: 16px; */
+    outline: none;
+    border: 1px solid var(--brown);
+    width: fit-content;
+    align-self: center;
+    font-size: 1rem;
+
+    /* background-color: var); */
+}
+
+
+
+input:hover {
+    box-shadow: 2px 2px 2px var(--brown);
+
+}
+
+
+input:focus {
+    box-shadow: 2px 2px 2px var(--brown);
+
+}
+
+input[type='radio']:hover {
+    box-shadow: 0 0 0 black !important; 
+}
+
+input[type='radio']:focus {
+    box-shadow: 0 0 0 black !important; 
+}
+
+button:hover {
+    box-shadow: 2px 2px 2px var(--brown);
+}
+
+button:focus {
+    box-shadow: 2px 2px 2px var(--brown);
+
+}
+
+#show-password-button {
+    box-shadow: 0 0 0 var(--brown) !important;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+label {
+    text-align: center;
+}
+
+.candidate-header {
+    /* width: calc(var(--scorecard-width) / 2); */
+    /* border: 1px solid black; */
+    /* align-self: center; */
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+.opinion {
+    margin: .5em;
+    min-width: 6em;
+    max-width: 8em;
+    border-radius: 12px;
+}
+
+.opinion:hover {
+    box-shadow: 4px 4px 3px var(--brown);
+
+}
+
+.opinion.selected {
+    /* border: 1px solid black; */
+    box-shadow: 3px 3px 3px var(--brown);
+}
+
+.yes {
+    background-color: var(--green);
+}
+
+.leans-yes {
+    background-color: var(--yellow-green);
+}
+
+.neutral {
+    background-color: var(--yellow);
+}
+
+.leans-no {
+    background-color: var(--orange);
+}
+
+.no {
+    background-color: var(--red);
 }

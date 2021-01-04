@@ -16,6 +16,15 @@ const IssueHub = (props) => {
         setEditing(true)
         setEditingIssueId(issueId)
 
+        
+    }
+
+    const openNewIssue = () => {
+        setEditing(true)
+        setEditingIssueId(false)
+    }
+
+    const onEditing = () => {
         const issueTitleInput = document.getElementById('issue-title-input')
         const issueDescrInput = document.getElementById('issue-descr-input')
 
@@ -23,7 +32,7 @@ const IssueHub = (props) => {
         let descr
 
         issues.forEach(i => {
-            if(`${i._id}` === `${issueId}`) {
+            if(`${i._id}` === `${editingIssueId}`) {
                 title = i.title
                 descr = i.description
             }
@@ -32,11 +41,16 @@ const IssueHub = (props) => {
         setIssueDescr(descr)
         setIssueTitle(title)
 
-        issueTitleInput.value = title
-        issueDescrInput.value = descr
-        
+        issueTitleInput.value = title || ''
+        issueDescrInput.value = descr || ''
+
     }
 
+    const cancelEdit = () => {
+        setEditing(false)
+        setEditingIssueId(false)
+    }
+ 
     const deleteIssue = async (issueId) => {
         
 
@@ -55,8 +69,8 @@ const IssueHub = (props) => {
 
         const res = await axios(options)
 
-        console.log(`delete responce`)
-        console.log(res)
+        // console.log(`delete responce`)
+        // console.log(res)
         setTimeout(() => {
             importAllIssues()
         }, 100)
@@ -71,8 +85,8 @@ const IssueHub = (props) => {
 
         const res = await axios(options)
 
-        console.log(`getting issues`)
-        console.log(res)
+        // console.log(`getting issues`)
+        // console.log(res)
 
         setIssues(res.data)
 
@@ -100,9 +114,13 @@ const IssueHub = (props) => {
             }
         }
 
+        setEditing(false)
+        setEditingIssueId(false)
+
+
         const res = await axios(options)
         importAllIssues()
-        console.log(res)
+        // console.log(res)
     
     }
 
@@ -118,24 +136,41 @@ const IssueHub = (props) => {
     }
 
     useEffect(() => {
+        if(editing === true) {
+            onEditing()
+        }
+    }, [editing])
+
+    useEffect(() => {
         importAllIssues()
     }, [])
 
     return (
         <div className='IssueHub'>
-            <form id='new-issue-form' onSubmit={createNewIssue} >
-                <label htmlFor='issue-title-input'>Title</label>
-                <input id='issue-title-input' onChange={updateValue}></input>
-                <label htmlFor='issue-descr-input'>Description</label>
-                <input id='issue-descr-input' onChange={updateValue}></input>
-                <button type='submit' id='issue-submit-button' >Submit</button>
-            </form>
 
-            {issues.map((issue, i) => {
-                return (
-                    <Issue issue={issue} key={i} onEdit={editIssue} onDelete={deleteIssue} />
-                );
-            })}
+            {(editing===true)?
+                <form id='new-issue-form' onSubmit={createNewIssue} >
+                    <h2> {(editing === false)? 'New' : 'Editing'} Issue</h2>
+                    <label htmlFor='issue-title-input'>Title</label>
+                    <input id='issue-title-input' onChange={updateValue}></input>
+                    <label htmlFor='issue-descr-input'>Description</label>
+                    <input id='issue-descr-input' onChange={updateValue}></input>
+                    <button type='button' onClick={cancelEdit} id='cancel-issue-button'> Cancel </button>
+                    <button type='submit' id='issue-submit-button' >Submit</button>
+                </form>
+            :
+                <div id='all-issues'> 
+                    <h2>All Issues</h2>
+                    <button onClick={openNewIssue} id='new-issue-button'> New Issue </button>
+                    {issues.map((issue, i) => {
+                        return (
+                            <Issue issue={issue} key={i} onEdit={editIssue} onDelete={deleteIssue} />
+                        );
+                    })}
+                </div>
+            }
+
+
 
         </div>
     );
