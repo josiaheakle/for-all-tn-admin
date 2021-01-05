@@ -57,7 +57,8 @@ const IssueHub = (props) => {
         
 
         const options = {
-            url: 'http://localhost:4000/delete/issue',
+            url: `${process.env.REACT_APP_API_URL}/delete/issue`,
+            // url: 'http://localhost:4000/delete/issue',
             method: "POST",
             mode: 'cors',
             headers: {
@@ -91,7 +92,9 @@ const IssueHub = (props) => {
         // console.log(`importing issues`)
 
         const options = {
-            url: 'http://localhost:4000/get/issues',
+            url: `${process.env.REACT_APP_API_URL}/get/issues`,
+
+            // url: 'http://localhost:4000/get/issues',
             method: "GET"
         }
 
@@ -109,7 +112,9 @@ const IssueHub = (props) => {
 
 
         const options = {
-            url: 'http://localhost:4000/update/issue',
+            url: `${process.env.REACT_APP_API_URL}/update/issue`,
+
+            // url: 'http://localhost:4000/update/issue',
             method: "POST",
             mode: 'cors',
             headers: {

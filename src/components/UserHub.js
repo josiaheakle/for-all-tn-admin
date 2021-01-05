@@ -12,7 +12,9 @@ const UserHub = (props) => {
     const getAllUsers = async () => {
         
         const options = {
-            url: `http://localhost:4000/get/users/${UserHandler.getCurrentUser()._id}`,
+            url: `${process.env.REACT_APP_API_URL}/get/users/${UserHandler.getCurrentUser()._id}`,
+
+            // url: `http://localhost:4000/get/users/${UserHandler.getCurrentUser()._id}`, 
             method: "GET",
             mode: 'cors',
             headers: {

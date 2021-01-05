@@ -17,7 +17,8 @@ const LoginPage = (props) => {
     const loginUser = async () => {
 
         const options = {
-            url: 'http://localhost:4000/user/login',
+            url: `${process.env.REACT_APP_API_URL}/user/login`,
+            // url: 'http://localhost:4000/user/login',
             method: "POST",
             mode: 'cors',
             headers: {

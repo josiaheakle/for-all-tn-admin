@@ -6,20 +6,16 @@ require('dotenv').config();
 
 const CandidateHub = (props) => {
 
-    const [ candidates, setCandidates ] = useState(undefined)
-
     const [ senators, setSenators ] = useState(undefined)
-    const [ representatives, setRepresentatives ] = useState(undefined)
-
     const [ senatorsImported, setSenatorsImported ] = useState(false)
+    const [ representatives, setRepresentatives ] = useState(undefined)
     const [ representativesImported, setRepresentativesImported ] = useState(false)
-
-    const [ imported, setImported ] = useState(false)
 
     const importSenators = async () => {
 
         const options = {
-            url: `http://localhost:4000/get/candidates/senators`,
+            url: `${process.env.REACT_APP_API_URL}/get/candidates/senators`,
+            // url: `http://localhost:4000/get/candidates/senators`,
             method: "GET",
             mode: 'cors',
             headers: {
@@ -36,7 +32,8 @@ const CandidateHub = (props) => {
     const importRepresentatives = async () => {
 
         const options = {
-            url: `http://localhost:4000/get/candidates/representatives`,
+            url: `${process.env.REACT_APP_API_URL}/get/candidates/representatives`,
+            // url: `http://localhost:4000/get/candidates/representatives`,
             method: "GET",
             mode: 'cors',
             headers: {
@@ -51,29 +48,15 @@ const CandidateHub = (props) => {
     }
 
     const importAllCandidates = async () => {
-
-        // const options = {
-        //     url: `http://localhost:4000/get/candidates/all`,
-        //     method: "GET",
-        //     mode: 'cors',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // }
-
-        // const res = await axios(options)
-        // setCandidates(res.data)
-        // setImported(true)
-
         await importSenators()
         await importRepresentatives()
-
     }
 
     const requestUpdate = async () => {
 
         const options = {
-            url: "http://localhost:4000/update/all",
+            url: `${process.env.REACT_APP_API_URL}/update/all`,
+            // url: "http://localhost:4000/update/all",
             method: 'GET'
         }
 

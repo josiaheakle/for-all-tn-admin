@@ -16,7 +16,9 @@ const UserCard = (props) => {
         setChecked(!checked)
 
         const options = {
-            url: 'http://localhost:4000/update/admin',
+            url: `${process.env.REACT_APP_API_URL}/update/admin`,
+
+            // url: 'http://localhost:4000/update/admin',
             method: "POST",
             mode: 'cors',
             headers: {

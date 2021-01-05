@@ -18,7 +18,9 @@ const CandidateIssue = (props) => {
         
         
         const options = {
-            url: 'http://localhost:4000/update/opinion',
+            url: `${process.env.REACT_APP_API_URL}/update/opinion`,
+
+            // url: 'http://localhost:4000/update/opinion',
             method: "POST",
             mode: 'cors',
             headers: {

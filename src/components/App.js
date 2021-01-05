@@ -17,9 +17,12 @@ import { ToastContainer } from "react-toastify"
 import "../styles/style.css"
 import 'react-toastify/dist/ReactToastify.css';
 
-
 // media 
 import bgImg from "../media/sunsphere.jpg"
+
+// other
+require('dotenv').config();
+
 
 function App() {
 
