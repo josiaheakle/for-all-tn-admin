@@ -32,16 +32,11 @@ const LoginPage = (props) => {
         }
 
         const res = await axios(options)
+        toast(res.data.message)
+
         if(res.data.type === 'SUCCESS') {
-            toast(res.data.message)
             props.setUser(res.data.user)
-        } else {
-            setAlertMessage(res.data)
-            setTimeout(() => {
-                setAlertMessage('')
-            }, 10000)
         }
-        // console.log(res)
 
 
     }
@@ -65,13 +60,9 @@ const LoginPage = (props) => {
         }
 
         const res = await axios(options)
+        toast(res.data)
         if(res.data.type === 'SUCCESS') {
             props.setUser(res.data.user)
-        } else {
-            setAlertMessage(res.data)
-            setTimeout(() => {
-                setAlertMessage('')
-            }, 10000)
         }
         // console.log(res)
 
