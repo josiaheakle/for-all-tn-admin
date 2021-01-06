@@ -4,6 +4,7 @@ import axios from "axios"
 import Issue from "./Issue.js"
 import UserHandler from "../modules/UserHandler.js"
 import { toast } from "react-toastify"
+import DataHandler from "../modules/DataHandler.js"
 
 const IssueHub = (props) => {
 
@@ -14,11 +15,8 @@ const IssueHub = (props) => {
     const [issueDescr, setIssueDescr] = useState()
 
     const editIssue = (issueId) => {
-
         setEditing(true)
         setEditingIssueId(issueId)
-
-        
     }
 
     const openNewIssue = () => {
@@ -29,23 +27,18 @@ const IssueHub = (props) => {
     const onEditing = () => {
         const issueTitleInput = document.getElementById('issue-title-input')
         const issueDescrInput = document.getElementById('issue-descr-input')
-
         let title
         let descr
-
         issues.forEach(i => {
             if(`${i._id}` === `${editingIssueId}`) {
                 title = i.title
                 descr = i.description
             }
         })
-
         setIssueDescr(descr)
         setIssueTitle(title)
-
         issueTitleInput.value = title || ''
         issueDescrInput.value = descr || ''
-
     }
 
     const cancelEdit = () => {
@@ -54,11 +47,8 @@ const IssueHub = (props) => {
     }
  
     const deleteIssue = async (issueId) => {
-        
-
         const options = {
             url: `${process.env.REACT_APP_API_URL}/delete/issue`,
-            // url: 'http://localhost:4000/delete/issue',
             method: "POST",
             mode: 'cors',
             headers: {
@@ -70,51 +60,26 @@ const IssueHub = (props) => {
                 user: UserHandler.getCurrentUser()._id
             }
         }
-
         const res = await axios(options)
         if(res.data.type === 'SUCCESS') {
+            toast(res.data.message)
             setTimeout(() => {
                 importAllIssues()
             }, 200)
         }
         else toast(res.data.message)
-
-        // console.log(`delete responce`)
-        // console.log(res)
-        // setTimeout(() => {
-        //     importAllIssues()
-        // }, 100)
-
     }
 
-    const importAllIssues = async () => {
-
-        // console.log(`importing issues`)
-
-        const options = {
-            url: `${process.env.REACT_APP_API_URL}/get/issues`,
-
-            // url: 'http://localhost:4000/get/issues',
-            method: "GET"
-        }
-
-        const res = await axios(options)
-
-        setIssues(res.data)
-
+    const importAllIssues = async (update) => {
+        let res = await DataHandler.getIssues(update)
+        setIssues(res)
     }
 
     const createNewIssue = async (e) => {
-
         e.preventDefault()
-
         document.getElementById('new-issue-form').reset();
-
-
         const options = {
             url: `${process.env.REACT_APP_API_URL}/update/issue`,
-
-            // url: 'http://localhost:4000/update/issue',
             method: "POST",
             mode: 'cors',
             headers: {
@@ -128,18 +93,11 @@ const IssueHub = (props) => {
                 user: UserHandler.getCurrentUser()._id
             }
         }
-
         setEditing(false)
         setEditingIssueId(false)
-
-
         const res = await axios(options)
-
-        if(res.data.type !== 'SUCCESS') toast(res.data.message)
-        
-        importAllIssues()
-        // console.log(res)
-    
+        toast(res.data.message)
+        importAllIssues(true)
     }
 
     const updateValue = (e) => {
@@ -160,12 +118,11 @@ const IssueHub = (props) => {
     }, [editing])
 
     useEffect(() => {
-        importAllIssues()
+        importAllIssues(false)
     }, [])
 
     return (
         <div className='IssueHub card'>
-
             {(editing===true)?
                 <form id='new-issue-form' onSubmit={createNewIssue} >
                     <h2> {(editing === false)? 'New' : 'Editing'} Issue</h2>
@@ -187,9 +144,6 @@ const IssueHub = (props) => {
                     })}
                 </div>
             }
-
-
-
         </div>
     );
 

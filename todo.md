@@ -1,21 +1,5 @@
-features :
-    search
-        search by district and name
-    add/remove admin user so they can edit the opinions
-    have all opinion types to the right so they are even
-    fix mobile responsive
-
-bugs :
-
-
-before deployment : 
-    change all urls to deployed url
-        CandidateHub
-        IssueHub
-        LoginPage
-
-
-
-
-
 next : 
+    add dataHandler so data is saved and not imported every time page changes
+
+component : 
+    restyle && fix image errors by downloading images

@@ -1,27 +1,21 @@
 
-// import repIcon from "https://foralltn.org/wp-content/uploads/2020/12/rep-icon.png"
-// import demIcon from "https://foralltn.org/wp-content/uploads/2020/12/dem-icon.png"
-
-import {useState, useEffect} from 'react'
+import {useState, useEffect, Component} from 'react'
 import CandidateIssue from './CandidateIssue'
 
 const Candidate = (props) => {
 
     // props - c(andidate)
 
-    const [ editing, setEditing ] = useState(false)
+    const [ imgStr, setImgStr ] = useState(undefined)
 
-    const editCandidate = (e) => {
-        setEditing(true)
+    const convertImageToBinary = () => {
+        let base64String = btoa(String.fromCharCode(...new Uint8Array(props.c.imgFile.data.data)));
+        setImgStr(base64String)
     }
-
-/*
-    if(c.party === "Republican")
-        cParty.src = 'https://foralltn.org/wp-content/uploads/2020/12/rep-icon.png'
-    else if(c.party === "Democratic") 
-        cParty.src = 'https://foralltn.org/wp-content/uploads/2020/12/dem-icon.png'
-
-*/
+ 
+    useEffect(() => {
+        convertImageToBinary()
+    }, [])
 
     return (
         <div className='Candidate'>
@@ -29,7 +23,12 @@ const Candidate = (props) => {
 
                 <div className='candidate-information-container'>
                     <div className="candidate-sub-container">
-                        <img src={`https://for-all-tn-api.herokuapp.com/proxy-img?url=${props.c.img}`} className="candidate-image" />
+                        {(props.c.imgFile)?
+                            <img src={`data:${props.c.imgFile.type};base64,${imgStr}`} className="candidate-image" />
+                        :
+                            <img src={`https://for-all-tn-api.herokuapp.com/proxy-img?url=${props.c.img}`} className="candidate-image" />
+                        }
+
                     </div>
                     <div className="candidate-info">
                         <span className='candidate-name candidate-span'>{`${props.c.first_name} ${props.c.last_name}`}</span>

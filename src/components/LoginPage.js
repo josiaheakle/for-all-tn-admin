@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import { toast } from "react-toastify";
 
 const LoginPage = (props) => {
 
@@ -33,6 +33,7 @@ const LoginPage = (props) => {
 
         const res = await axios(options)
         if(res.data.type === 'SUCCESS') {
+            toast(res.data.message)
             props.setUser(res.data.user)
         } else {
             setAlertMessage(res.data)

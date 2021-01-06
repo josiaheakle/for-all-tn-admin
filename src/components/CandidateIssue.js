@@ -1,11 +1,16 @@
+
+// react/ visual methods
+import {toast} from 'react-toastify';
 import { useEffect, useState } from "react";
+
+// fetch
 import axios from "axios"
 
+// components
 import OpinionOption from "./OpinionOption.js"
+
+// modules
 import UserHandler from "../modules/UserHandler.js"
-
-import {toast} from 'react-toastify';
-
 
 const CandidateIssue = (props) => {
 
@@ -15,12 +20,8 @@ const CandidateIssue = (props) => {
     const [ candView, setCandView ] = useState(undefined)
 
     const updateCandidateView = async (opinionStr) => {
-        
-        
         const options = {
             url: `${process.env.REACT_APP_API_URL}/update/opinion`,
-
-            // url: 'http://localhost:4000/update/opinion',
             method: "POST",
             mode: 'cors',
             headers: {
@@ -34,14 +35,11 @@ const CandidateIssue = (props) => {
                 user: UserHandler.getCurrentUser()._id
             }
         }
-
         const res = await axios(options)
-
+        toast(res.data.message)
         if(res.data.type === 'SUCCESS') {
             setCandView(opinionStr)
         }
-        else toast(res.data.message)
-
     }
 
     useEffect(() => {

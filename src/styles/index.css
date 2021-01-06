@@ -40,10 +40,20 @@ code {
   --brown: var(--black-chocolate);
   /* --green: var(--army-green); */
 
-  --scorecard-width: 90vw;
   --image-width: 100px;
   --icon-width: 80px;
 
 
   font-family: 'Lato', sans-serif;
+}
+
+@media only screen and (max-width: 600px) {
+  :root {
+    --scorecard-width: 95vw;
+  }
+}
+@media only screen and (min-width: 601px) {
+  :root {
+    --scorecard-width: 90vw;
+  }
 }

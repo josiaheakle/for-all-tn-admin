@@ -1,6 +1,3 @@
-
-
-
 const Issue = (props) => {
     // props - issue object { title, description }
     //          onEdit (issueId) parent function
@@ -11,9 +8,6 @@ const Issue = (props) => {
     }
 
     const deleteIssue = () => {
-
-        // TODO : verify deletion using modal
-
         props.onDelete(props.issue._id)
     }
 

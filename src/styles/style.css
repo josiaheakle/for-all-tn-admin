@@ -369,7 +369,9 @@
 
 
 .candidate-info {
-    /* width: 200px; */
+    width: 90px;
+    padding-left: .5em;
+    padding-right: .5em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -423,13 +425,11 @@
 .LoginPage {
     display: flex;
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 3em);
     overflow: hidden;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-
 
 }
 
