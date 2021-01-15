@@ -10,10 +10,10 @@ const Candidate = (props) => {
 
     const convertImageToBinary = () => {
 
-        setImgStr(props.c.imgFile.data)
+        // setImgStr(props.c.imgFile.data)
 
-        // let base64String = btoa(String.fromCharCode(...new Uint8Array(props.c.imgFile.data.data)));
-        // setImgStr(base64String)
+        let base64String = btoa(String.fromCharCode(...new Uint8Array(props.c.imgFile.data.data)));
+        setImgStr(base64String)
     }
  
     useEffect(() => {

@@ -63,11 +63,12 @@ const IssueHub = (props) => {
         const res = await axios(options)
         if(res.data.type === 'SUCCESS') {
             toast(res.data.message)
-            setTimeout(() => {
-                importAllIssues()
-            }, 200)
+
         }
         else toast(res.data.message)
+        setTimeout(() => {
+            importAllIssues()
+        }, 200)
     }
 
     const importAllIssues = async (update) => {

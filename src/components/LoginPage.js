@@ -44,7 +44,7 @@ const LoginPage = (props) => {
     const createNewUser = async () => {
 
         const options = {
-            url: 'http://localhost:4000/user/new',
+            url: `${process.env.REACT_APP_API_URL}/user/new`,
             method: "POST",
             mode: 'cors',
             headers: {
@@ -60,7 +60,7 @@ const LoginPage = (props) => {
         }
 
         const res = await axios(options)
-        toast(res.data)
+        toast(res.data.message)
         if(res.data.type === 'SUCCESS') {
             props.setUser(res.data.user)
         }

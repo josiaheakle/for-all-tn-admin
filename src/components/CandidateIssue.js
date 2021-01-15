@@ -58,6 +58,8 @@ const CandidateIssue = (props) => {
                         <OpinionOption updateView={updateCandidateView} opinion='neutral' cId={props.cId} initSelected={(candView==='Neutral')?true:false} issue={props.issue} ></OpinionOption>
                         <OpinionOption updateView={updateCandidateView} opinion='leans-no' cId={props.cId} initSelected={(candView==='Leans No')?true:false} issue={props.issue} ></OpinionOption>
                         <OpinionOption updateView={updateCandidateView} opinion='no' cId={props.cId} initSelected={(candView==='No')?true:false} issue={props.issue} ></OpinionOption>
+                        <OpinionOption updateView={updateCandidateView} opinion='unknown' cId={props.cId} initSelected={(candView==='Unknown')?true:false} issue={props.issue} ></OpinionOption>
+
 
                     </form>
                 :null}
