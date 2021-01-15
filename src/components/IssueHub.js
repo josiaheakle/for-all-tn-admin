@@ -119,7 +119,7 @@ const IssueHub = (props) => {
     }, [editing])
 
     useEffect(() => {
-        importAllIssues(false)
+        importAllIssues(true)
     }, [])
 
     return (
