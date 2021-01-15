@@ -42,21 +42,21 @@ const DataHandler = (() => {
     }
 
     const getSens = async (update) => {
-        if(_sens === undefined || update === true) {
+        // if(_sens === undefined || update === true) {
             await importAllSens()
             return _sens
-        } else {
-            return _sens
-        }
+        // } else {
+        //     return _sens
+        // }
     }
 
     const getReps = async (update) => { 
-        if(_reps === undefined || update === true) {
+        // if(_reps === undefined || update === true) {
             await importAllReps()
             return _reps
-        } else {
-            return _reps
-        }
+        // } else {
+        //     return _reps
+        // }
     }
 
     const importAllIssues = async () => {
@@ -70,12 +70,12 @@ const DataHandler = (() => {
     }
 
     const getIssues = async (update) => {
-        if(_issues === undefined || update) {
+        // if(_issues === undefined || update) {
             await importAllIssues()
             return _issues
-        } else {
-            return _issues
-        }
+        // } else {
+        //     return _issues
+        // }
     }
 
     return {
