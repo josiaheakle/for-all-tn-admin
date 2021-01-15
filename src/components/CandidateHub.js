@@ -45,7 +45,7 @@ const CandidateHub = (props) => {
     }
 
     useEffect(() => {
-        importAllCandidates(false)
+        importAllCandidates(true)
     }, [])
 
     return(
