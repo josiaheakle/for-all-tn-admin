@@ -19,6 +19,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // media 
 import bgImg from "../media/sunsphere.jpg"
+import AccountHub from "./AccountHub.js"
 
 // other
 require('dotenv').config();
@@ -43,7 +44,8 @@ function App() {
   return (
     <div className="App" >
       <ToastContainer hideProgressBar={true}  />
-        <div className='background-image' style={{ backgroundImage: `url(${bgImg})` }} ></div>
+      {/* style={{ backgroundImage: `url(${bgImg})` }} */}
+        <div className='background-image' ></div>
 
         {/* <button id='loggout-button' onClick={UserHandler.loggoutUser}>
           Loggout
@@ -68,6 +70,8 @@ function App() {
                 <Link className='navbar-link' to='/candidates'>Candidates</Link>
                 <Link className='navbar-link selected' to='/issues'>Issues</Link>
                 <Link className='navbar-link' to='/users'>Users</Link>
+                <Link className='navbar-link' to='/account'>Account</Link>
+
               </div>
               <IssueHub />
               {(user===undefined) 
@@ -80,6 +84,8 @@ function App() {
                 <Link className='navbar-link selected' to='/candidates'>Candidates</Link>
                 <Link className='navbar-link' to='/issues'>Issues</Link>
                 <Link className='navbar-link' to='/users'>Users</Link>
+                <Link className='navbar-link' to='/account'>Account</Link>
+
               </div>
               <CandidateHub />
               {(user===undefined) 
@@ -92,6 +98,8 @@ function App() {
                 <Link className='navbar-link' to='/candidates'>Candidates</Link>
                 <Link className='navbar-link' to='/issues'>Issues</Link>
                 <Link className='navbar-link selected' to='/users'>Users</Link>
+                <Link className='navbar-link' to='/account'>Account</Link>
+
               </div>
               <UserHub />
               {(user===undefined) 
@@ -99,6 +107,20 @@ function App() {
                 : null
               }
             </Route>
+            <Route path='/account'>
+              <div className="navbar">
+                <Link className='navbar-link' to='/candidates'>Candidates</Link>
+                <Link className='navbar-link' to='/issues'>Issues</Link>
+                <Link className='navbar-link' to='/users'>Users</Link>
+                <Link className='navbar-link selected' to='/account'>Account</Link>
+              </div>
+              <AccountHub />
+              {(user===undefined) 
+                ? <Redirect to='/login' /> 
+                : null
+              }
+            </Route>
+
             <Route path='/'>
               {(user===undefined) 
                 ? <Redirect to='/login' /> 

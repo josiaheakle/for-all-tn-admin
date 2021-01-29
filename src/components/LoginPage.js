@@ -143,7 +143,7 @@ const LoginPage = (props) => {
                         
                             (
                             <input onChange={togglePasswordVisibility} type='checkbox' id='show-password-button'></input>
-                            <label htmlFor='show-password-button'>Show</label>
+                            <label htmlFor='show-password-button' id='show-password-button-label'>Show</label>
                             )
                         </label>
                         <input onChange={editValue} type='password' id='password-input' required='true'></input>

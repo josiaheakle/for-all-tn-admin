@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import UserHandler from "../modules/UserHandler.js"
 
@@ -8,12 +7,10 @@ const UserCard = (props) => {
     // props -
     //      user
 
-    const [ isAdmin, setIsAdmin ] = useState(false)
-    const [ checked, setChecked ] = useState(false)
+    // const [ isAdmin, setIsAdmin ] = useState(false)
+    // const [ checked, setChecked ] = useState(false)
 
     const updateAdminStatus = async (e) => {
-
-        setChecked(!checked)
 
         const options = {
             url: `${process.env.REACT_APP_API_URL}/update/admin`,
@@ -27,26 +24,29 @@ const UserCard = (props) => {
             },
             data: {
                 userToAdmin: props.user._id,
-                adminStatus: isAdmin,
+                adminStatus: e.target.checked,
                 user: UserHandler.getCurrentUser()._id
             }
         }
 
         const res = await axios(options)
-        if(res.data.type === 'SUCCESS') {
-            setIsAdmin(checked)
-            toast(res.data.message)
-        } else {
-            setChecked(isAdmin)
-            toast(res.data.message)
-        }
+        // if(res.data.type === 'SUCCESS') {
+        //     setIsAdmin(checked)
+        toast(res.data.message)
+        // } else {
+        //     setChecked(isAdmin)
+        //     toast(res.data.message)
+        // }
 
     }
 
-    useEffect(() => {
-        setIsAdmin(props.user.admin)
-        setChecked(props.user.admin)
-    }, [])
+    // useEffect(() => {
+
+    // }, [checked])
+
+    // useEffect(() => {
+    //     setChecked(props.user.admin)
+    // }, [])
 
     return(
         <div className='UserCard' id={`user-${props.user._id}`} >
@@ -58,7 +58,7 @@ const UserCard = (props) => {
             </div>
             <div>
                 <label htmlFor='user-admin-checkbox'>Admin </label>
-                <input onChange={updateAdminStatus} id='user-admin-checkbox' type='checkbox' checked={checked} ></input>
+                <input onClick={updateAdminStatus} id='user-admin-checkbox' type='checkbox' defaultChecked={props.user.admin} ></input>
             </div>
         </div>
     );
