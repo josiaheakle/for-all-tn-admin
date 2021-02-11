@@ -21,9 +21,10 @@
 .App {
 
     width: 100vw;
-    min-height: calc(100vh - 3em);
+    /* min-height: calc(100vh - 3em); */
+    min-height: 100vh;
 
-    padding-top: 3em;
+    /* padding-top: 3em; */
 
     /* position: absolute; */
     display: flex;
@@ -449,16 +450,17 @@
 
 .login-form {
     margin-bottom: 1rem;
+    width: 250px;
 }
 
 .login-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     border: 1px solid black;
     /* border-radius: 10px; */
     padding: 3em;
-
-    max-width: calc(350px - 6em);
+    min-width: 35vw;
     text-align: center;
 
     font-size: 1.5em;
@@ -471,6 +473,9 @@
 
 }
 
+.login-header {
+    justify-self:flex-start;
+}
 
 .align-vertical {
     display: flex;
@@ -631,4 +636,60 @@ label {
 
 button {
     margin-bottom: .5rem;
+}
+
+.password-input-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.show-password-button-container {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+
+    top: 1.2em;
+    padding-right: .5em;
+    align-items: center;
+}
+
+#show-password-button-label {
+    height: 1em;
+}
+
+#show-password-button {
+    margin: .1em;
+}
+
+label{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.pad-bot {
+    padding-bottom: 1em;
+}
+
+.loader-container {
+    width: 0;
+    height: 0;
+    position: fixed;
+    top: 60px;
+    right: 120px;
+}
+
+.loader {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid black; /* Blue */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin-load 2s linear infinite;
+    margin-bottom: 1em;
+}
+
+@keyframes spin-load {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

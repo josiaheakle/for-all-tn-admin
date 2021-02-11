@@ -1,7 +1,7 @@
 
 // react/ visual methods
 import {toast} from 'react-toastify';
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 // fetch
 import axios from "axios"
@@ -11,6 +11,7 @@ import OpinionOption from "./OpinionOption.js"
 
 // modules
 import UserHandler from "../modules/UserHandler.js"
+import { LoaderContext } from './Loader.js';
 
 const CandidateIssue = (props) => {
 
@@ -19,7 +20,10 @@ const CandidateIssue = (props) => {
 
     const [ candView, setCandView ] = useState(undefined)
 
+    const { isLoading, updateIsLoading } = useContext(LoaderContext); 
+
     const updateCandidateView = async (opinionStr) => {
+        updateIsLoading(true)
         const options = {
             url: `${process.env.REACT_APP_API_URL}/update/opinion`,
             method: "POST",
@@ -40,6 +44,7 @@ const CandidateIssue = (props) => {
         if(res.data.type === 'SUCCESS') {
             setCandView(opinionStr)
         }
+        updateIsLoading(false)
     }
 
     useEffect(() => {

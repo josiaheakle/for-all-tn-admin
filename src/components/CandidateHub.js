@@ -1,7 +1,8 @@
 import Candidate from "./Candidate.js"
-import {useState, useEffect} from "react"
+import {useState, useEffect, useContext} from "react"
 
 import DataHandler from "../modules/DataHandler.js"
+import { LoaderContext } from "./Loader.js"
 
 const CandidateHub = (props) => {
 
@@ -10,14 +11,17 @@ const CandidateHub = (props) => {
     const [ representatives, setRepresentatives ] = useState(undefined)
     const [ representativesImported, setRepresentativesImported ] = useState(false)
 
+    const { isLoading, updateIsLoading } = useContext(LoaderContext);
+ 
     const importAllCandidates = async (update) => {
-        // param (update) bool, if true: have datahandler refresh data
+        updateIsLoading(true);
         let sens = await DataHandler.getSens(update)
         setSenators(sens)
         setSenatorsImported(true)
         let reps = await DataHandler.getReps(update)
         setRepresentatives(reps)
         setRepresentativesImported(true)
+        updateIsLoading(false);
     }
 
     const requestUpdate = async () => {

@@ -20,6 +20,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // media 
 import bgImg from "../media/sunsphere.jpg"
 import AccountHub from "./AccountHub.js"
+import Loader, { LoaderContext } from "./Loader.js"
 
 // other
 require('dotenv').config();
@@ -27,12 +28,15 @@ require('dotenv').config();
 
 function App() {
 
-  const [ user, setUser ] = useState(undefined)
+  const [ isLoading, setIsLoading ] = useState(false);
+  const [ user, setUser ] = useState(undefined);
+
+  const updateIsLoading = (bool) => {
+    setIsLoading(bool);
+  }
 
   useEffect(() => {
     UserHandler.setOnUserUpdate(setUser)
-
-    // console.log('on mount')
 
   }, [])
 
@@ -43,14 +47,12 @@ function App() {
 
   return (
     <div className="App" >
-      <ToastContainer hideProgressBar={true}  />
+      <ToastContainer hideProgressBar={true} position={'bottom-right'}  />
       {/* style={{ backgroundImage: `url(${bgImg})` }} */}
         <div className='background-image' ></div>
-
-        {/* <button id='loggout-button' onClick={UserHandler.loggoutUser}>
-          Loggout
-        </button> */}
         <BrowserRouter >
+          <LoaderContext.Provider value={{isLoading, updateIsLoading}} >
+          <Loader ></Loader>
           <Switch>
             <Route exact path='/'>
               {(user===undefined) 
@@ -128,6 +130,7 @@ function App() {
               }
             </Route>
           </Switch>
+          </LoaderContext.Provider>
         </BrowserRouter>
     </div>
 

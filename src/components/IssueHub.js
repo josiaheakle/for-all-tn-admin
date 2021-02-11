@@ -1,10 +1,11 @@
 
-import {useEffect, useState} from "react"
+import {useEffect, useState, useContext} from "react"
 import axios from "axios"
 import Issue from "./Issue.js"
 import UserHandler from "../modules/UserHandler.js"
 import { toast } from "react-toastify"
 import DataHandler from "../modules/DataHandler.js"
+import { LoaderContext } from "./Loader.js"
 
 const IssueHub = (props) => {
 
@@ -13,6 +14,8 @@ const IssueHub = (props) => {
     const [editingIssueId, setEditingIssueId] = useState(false)
     const [issueTitle, setIssueTitle] = useState()
     const [issueDescr, setIssueDescr] = useState()
+    const {isLoading, updateIsLoading} = useContext(LoaderContext);
+
 
     const editIssue = (issueId) => {
         setEditing(true)
@@ -47,6 +50,7 @@ const IssueHub = (props) => {
     }
  
     const deleteIssue = async (issueId) => {
+        updateIsLoading(true);
         const options = {
             url: `${process.env.REACT_APP_API_URL}/delete/issue`,
             method: "POST",
@@ -60,6 +64,7 @@ const IssueHub = (props) => {
                 user: UserHandler.getCurrentUser()._id
             }
         }
+        updateIsLoading(false)
         const res = await axios(options)
         if(res.data.type === 'SUCCESS') {
             toast(res.data.message)
@@ -72,7 +77,9 @@ const IssueHub = (props) => {
     }
 
     const importAllIssues = async (update) => {
+        updateIsLoading(true)
         let res = await DataHandler.getIssues(update)
+        updateIsLoading(false)
         setIssues(res)
     }
 

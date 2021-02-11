@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { LoaderContext } from "./Loader";
 
 const LoginPage = (props) => {
 
@@ -13,12 +14,78 @@ const LoginPage = (props) => {
     const [ password, setPassword ] = useState()
     const [ firstName, setFirstName ] = useState()
     const [ lastName, setLastName ] = useState()
+    const [ resetPass, setResetPass ] = useState(false);
+    const [ newPass, setNewPass ] = useState('');
+    const [ resetCode, setResetCode ] = useState('');
+    const [ emailSent, setEmailSent ] = useState(false);
+    const [ passwordInputType, setPasswordInputType ] = useState('password');
+
+    const { isLoading, updateIsLoading } = useContext(LoaderContext); 
+
+    const sendCode = async (e) =>{
+        e.preventDefault();
+        e.target.reset();
+        updateIsLoading(true)
+
+        const options = {
+            url: `${process.env.REACT_APP_API_URL}/reset/password`,
+            method: "POST",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                "Accept": "application/json"
+            },
+            data: {
+                email: email
+            }        
+        }
+
+        const res = await axios(options)
+        toast(res.data.message)
+        if(res.data.type === 'SUCCESS') {
+            setEmailSent(true);
+        }
+        updateIsLoading(false)
+
+
+    }
+
+    const sendResetPass = async (e) =>{
+        e.preventDefault();
+        e.target.reset();
+
+        updateIsLoading(true)
+
+        const options = {
+            url: `${process.env.REACT_APP_API_URL}/reset/code`,
+            method: "POST",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                "Accept": "application/json"
+            },
+            data: {
+                email: email,
+                code: resetCode,
+                newPass: password
+            }        
+        }
+
+        const res = await axios(options)
+        console.log(res)
+        toast(res.data.message)
+        if(res.data.type === 'SUCCESS') {
+            setResetPass(false);
+        }
+
+        updateIsLoading(false)
+
+    }
 
     const loginUser = async () => {
 
         const options = {
             url: `${process.env.REACT_APP_API_URL}/user/login`,
-            // url: 'http://localhost:4000/user/login',
             method: "POST",
             mode: 'cors',
             headers: {
@@ -43,6 +110,7 @@ const LoginPage = (props) => {
 
     const createNewUser = async () => {
 
+        updateIsLoading(true)
         const options = {
             url: `${process.env.REACT_APP_API_URL}/user/new`,
             method: "POST",
@@ -64,6 +132,7 @@ const LoginPage = (props) => {
         if(res.data.type === 'SUCCESS') {
             props.setUser(res.data.user)
         }
+        updateIsLoading(false)
         // console.log(res)
 
     }
@@ -92,6 +161,7 @@ const LoginPage = (props) => {
     }
 
     const togglePasswordVisibility = () => {
+        setPasswordInputType((passwordInputType==='password')?'text':'password');
         const passwordCheckbox = document.getElementById('show-password-button')
         const passwordInput = document.getElementById('password-input')
         if(passwordCheckbox.checked) {
@@ -110,6 +180,13 @@ const LoginPage = (props) => {
         }
     }
 
+    useEffect(()=>{
+        setEmail('');
+        setPasswordInputType('password');
+        setPassword('');
+        setEmailSent(false);
+    }, [resetPass])
+
     // useEffect(() => {
     //     // console.log(`email: ${email}, \npassword: ${password}, \nfirstname: ${firstName}, \nlastname: ${lastName}`)
     // }, [password, email, firstName, lastName])
@@ -118,10 +195,15 @@ const LoginPage = (props) => {
         <div className='LoginPage'>
 
             <div className='login-header'>
-                <h1> For All TN Admin </h1>
+                <h1> For All TN Scorecard Manager </h1>
             </div>
 
+
+            {(resetPass === false) ? 
+
             <div className='login-container'>
+
+
 
                 <h2>
                     {(!newAccount)?`Login`:`Create Account`}
@@ -140,14 +222,15 @@ const LoginPage = (props) => {
                             </div>
                         : null}
                         <label htmlFor='password-input'>Password
-                        
-                            (
-                            <input onChange={togglePasswordVisibility} type='checkbox' id='show-password-button'></input>
-                            <label htmlFor='show-password-button' id='show-password-button-label'>Show</label>
-                            )
+                            <span className='show-password-button-container'>
+                                <input onChange={togglePasswordVisibility} type='checkbox' id='show-password-button'></input>
+                                <label htmlFor='show-password-button' id='show-password-button-label'>Show</label>
+                            </span>
                         </label>
-                        <input onChange={editValue} type='password' id='password-input' required='true'></input>
-
+                            <input onChange={editValue} type={passwordInputType} id='password-input' required='true'></input>
+                        {(newAccount===false)?
+                        <button type='button' onClick={()=>{setResetPass(true)}} >Forgot your password?</button>
+                        :null}
                         <button type='submit' >
                             {(newAccount===true)?
                                 'Create Account'
@@ -174,6 +257,44 @@ const LoginPage = (props) => {
 
 
             </div>
+            : 
+            
+            <div className='login-container'>
+                <h2>Password Reset</h2>
+                
+                {(emailSent === false) ? 
+                    <div>
+                        <form onSubmit={sendCode} className='login-form'>
+                            <label htmlFor='email-input'>Email</label>
+                            <input id='email-input' onChange={(e) => {setEmail(e.target.value)}} ></input>
+                            <button type='submit' >Reset Password</button>
+                        </form>
+                    </div>
+                :
+                    <div>
+                        <form onSubmit={sendResetPass} className='login-form'>
+                            <span className='pad-bot'>A code has been sent to your email.</span>
+                            <label htmlFor='email-input'>Code</label>
+                            <input id='email-input' onChange={(e) => {setResetCode(e.target.value)}} ></input>
+                            <label htmlFor='password-input'>Password
+                            <span className='show-password-button-container'>
+                                    <input onChange={togglePasswordVisibility} type='checkbox' id='show-password-button'></input>
+                                    <label htmlFor='show-password-button' id='show-password-button-label'>Show</label>
+                            </span>
+                            </label>
+                                <input onChange={editValue} type={passwordInputType} id='password-input' required='true'></input>
+
+                            <button type='submit' >Reset Password</button>
+                        </form>
+                    </div>
+                }
+
+                <button onClick={()=>{setResetPass(false)}}>Cancel</button>
+            </div>
+            
+            
+            }
+
         </div>
     );
 }
