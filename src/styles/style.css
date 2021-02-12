@@ -18,6 +18,10 @@
     filter: blur(8px); */
 }
 
+h1 {
+    text-align: center;
+}
+
 .App {
 
     width: 100vw;
@@ -61,6 +65,7 @@
     flex-direction: column;
     align-items: center;
     gap: 1em;
+    padding-top: 3rem;
 }
 
 /* .IssueHub {
@@ -255,6 +260,10 @@
 
 @media only screen and (max-width: 1100px) and (min-width: 951px) {
 
+    .candidate-image:hover {
+        transform: scale(2) translateY(calc(var(--image-width) / 4));
+    }
+
     .candidate-issue-container {
         flex-direction: column;
     }
@@ -286,6 +295,10 @@
 
 @media only screen and (min-width: 1101px) {
 
+    .candidate-image:hover {
+        transform: scale(2) translateX(calc(var(--image-width) / 4)) translateY(calc(var(--image-width) / 12));
+    }
+
     .candidate-issue-container {
         flex-direction: column;
     }
@@ -311,6 +324,10 @@
 
 @media only screen and (min-width: 851px) and (max-width: 950px) {
 
+
+    .candidate-image:hover {
+        transform: scale(2) translateY(calc(var(--image-width) / 4));
+    }
 
 
     .candidate-issue-container {
@@ -338,6 +355,10 @@
 }
 
 @media only screen and (max-width: 850px) {
+
+    .candidate-image:hover {
+        transform: scale(2) translateY(calc(var(--image-width) / 4)) translateX(calc(var(--image-width) / 4));
+    }
 
     .navbar-link {
         padding: 0.4rem;
@@ -399,7 +420,10 @@
     width: var(--image-width);
     height: var(--image-width);
     border-radius: 12px;
+    transition: transform .4s;
 }
+
+
 
 .candidate-party-image {
     width: var(--icon-width);
@@ -573,10 +597,13 @@ label {
     min-width: 6em;
     max-width: 8em;
     border-radius: 12px;
+    transition: transform .2s;
 }
 
-.opinion:hover {
-    box-shadow: 4px 4px 3px var(--brown);
+.opinion:hover,
+.opinion:focus {
+    /* box-shadow: 4px 4px 3px var(--brown); */
+    transform: scale(1.2);
 
 }
 
@@ -621,6 +648,8 @@ label {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 4rem;
+
 }
 
 .align-horizontal {
@@ -665,6 +694,7 @@ label{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
 }
 
 .pad-bot {
@@ -692,4 +722,8 @@ label{
 @keyframes spin-load {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+#change-password-form {
+    font-size: 1.2em;
 }

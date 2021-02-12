@@ -47,7 +47,7 @@ function App() {
 
   return (
     <div className="App" >
-      <ToastContainer hideProgressBar={true} position={'bottom-right'}  />
+      <ToastContainer hideProgressBar={true} position={'bottom-right'} limit={1} autoClose={2500} />
       {/* style={{ backgroundImage: `url(${bgImg})` }} */}
         <div className='background-image' ></div>
         <BrowserRouter >

@@ -9,6 +9,7 @@ const AccountHub = (props) => {
     const [ changingPass, setChangingPass ] = useState(false);
     const [ deleting, setDeleting ] = useState(false);
     const [ showPass, setShowPass ] = useState(false);
+    const [ showNewPass, setShowNewPass ] = useState(false);
     const [ oldPass, setOldPass ] = useState('');
     const [ newPass, setNewPass ] = useState('');
 
@@ -69,13 +70,22 @@ const AccountHub = (props) => {
             <h2> Account Settings </h2>
 
             {(changingPass) ? 
-            <form onSubmit={(e) => {e.preventDefault();}} id='change-password-form'>
-                <label htmlFor='old-pass-input' >Old Password</label>
-                <input onChange={(e) => {setOldPass(e.target.value)}} type={(showPass === false) ? 'password' : 'text'} id='old-pass-input' />
-                <label htmlFor='new-pass-input'> New Password </label>
-                <input onChange={(e) => {setNewPass(e.target.value)}} type={(showPass === false) ? 'password' : 'text'} id='new-pass-input' />
-                <label htmlFor='show-password-button' id='show-password-button-label'>Show Password</label>
-                <input onChange={(e) => {setShowPass(e.target.checked)}} type='checkbox' id='show-password-button'></input>
+            <form onSubmit={(e) => {e.preventDefault()}} id='change-password-form' className='' >
+                <label htmlFor='password-input'>Old Password
+                    <span className='show-password-button-container'>
+                            <input onChange={(e) => {setShowPass(e.target.checked)}} type='checkbox' id='show-password-button'></input>
+                            <label htmlFor='show-password-button' id='show-password-button-label'>Show</label>
+                    </span>
+                </label>
+                <input onChange={(e) => {setOldPass(e.target.value)}} type={(showPass === false) ? 'password' : 'text'} id='password-input' required='true'></input>
+
+                <label htmlFor='password-input'>New Password
+                    <span className='show-password-button-container'>
+                            <input onChange={(e) => {setShowNewPass(e.target.checked)}} type='checkbox' id='show-password-button'></input>
+                            <label htmlFor='show-password-button' id='show-password-button-label'>Show</label>
+                    </span>
+                </label>
+                <input onChange={(e) => {setNewPass(e.target.value)}} type={(showNewPass === false) ? 'password' : 'text'} id='password-input' required='true'></input>
                 <span>
                     <button type='button' onClick={() => {setChangingPass(false); setOldPass(''); setNewPass('');}}> Cancel </button>
                     <button type='submit' onClick={updatePass}> Submit </button>
