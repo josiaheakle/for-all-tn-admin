@@ -156,6 +156,7 @@ h1 {
 }
 
 .navbar {
+    z-index: 10;
     position: fixed;
     top: 0;
     left: 0;
@@ -596,7 +597,8 @@ label {
     min-width: 6em;
     max-width: 8em;
     border-radius: 12px;
-    transition: transform .2s;
+    transition: transform .2s, border .2s;
+    z-index: 0 !important;
 }
 
 .opinion:hover,
@@ -607,8 +609,8 @@ label {
 }
 
 .opinion.selected {
-    /* border: 1px solid black; */
-    /* box-shadow: 3px 3px 3px var(--brown); */
+    transform: scale(1.2);
+    border: 2px solid black;
 }
 
 .yes {
