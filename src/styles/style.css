@@ -141,7 +141,7 @@ h1 {
     max-width: 1100px;
     /* justify-self: center; */
     padding: 12px;
-    box-shadow: 0px 3px 3px var(--brown);
+    /* box-shadow: 0px 3px 3px var(--brown); */
     /* border: 1px solid black; */
     border-radius: 20px;
     margin-bottom: 1em;
@@ -206,7 +206,7 @@ h1 {
     justify-content: space-between;
 
     background-color: var(--light);
-    box-shadow: 2px 2px 3px var(--brown);
+    /* box-shadow: 2px 2px 3px var(--brown); */
     /* border: 1px solid black; */
     padding: 1em;
     margin-bottom: 1em;
@@ -529,32 +529,31 @@ button {
 
 
 
-input:hover {
-    box-shadow: 2px 2px 2px var(--brown);
-
-}
-
-
-input:focus {
-    box-shadow: 2px 2px 2px var(--brown);
-
-}
-
-input[type='radio']:hover {
-    box-shadow: 0 0 0 black !important; 
-}
-
-input[type='radio']:focus {
-    box-shadow: 0 0 0 black !important; 
-}
-
-button:hover {
-    box-shadow: 2px 2px 2px var(--brown);
-}
-
+input:hover,
+input:focus,
+button:hover,
 button:focus {
-    box-shadow: 2px 2px 2px var(--brown);
+    
+    outline: 1px solid black;
 
+}
+
+
+input[type='radio']:hover,
+input[type='radio']:focus,
+input[type='checkbox']:hover,
+input[type='checkbox']:focus  {
+    box-shadow: 0 0 0 black !important; 
+    outline: none;
+}
+
+button {
+    transition: transform .2s;
+}
+
+button:hover,
+button:focus {
+    transform: scale(1.1);
 }
 
 
@@ -609,7 +608,7 @@ label {
 
 .opinion.selected {
     /* border: 1px solid black; */
-    box-shadow: 3px 3px 3px var(--brown);
+    /* box-shadow: 3px 3px 3px var(--brown); */
 }
 
 .yes {
